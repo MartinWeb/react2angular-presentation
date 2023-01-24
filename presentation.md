@@ -37,3 +37,52 @@ name: why-react
 - Librairies à disposition en interne pour faciliter développement et maintenance (`toolkits`, ...)
 
 .center[![i just migrate to react](https://i.imgflip.com/78l9y9.jpg)]
+
+---
+
+name: how
+
+# 2. Comment migrer ?
+
+- Effectuer une refonte complète de l'application
+
+.pure-table.pure-table-bordered.pure-table-striped.smaller-font[
+| Avantages                                 | Inconvénients                                                                     |
+|-------------------------------------------|-----------------------------------------------------------------------------------|
+| Implication de l'équipe de développement  | Complexe sur des sujets majeurs, avec des roadmap chargées et de fortes deadlines |
+| Refonte à l'état de l'art                 | Presque impossible à mettre en oeuvre dans les faits                              |
+| Pas de configuration spécifique au projet |                                                                                   |]
+
+---
+
+# 2. Comment migrer ?
+- Effectuer une migration par route
+
+Avoir deux applications : une dans la technologie actuelle, et l'autre dans la technologie cible. Chaque route de l'application redirigera ensuite vers la nouvelle ou vers l'ancienne version.
+
+.pure-table.pure-table-bordered.pure-table-striped.smaller-font[
+| Avantages                 | Inconvénients                              |
+|---------------------------|--------------------------------------------|
+| Refonte à l'état de l'art | Double application (coûts supplémentaires) |
+| Facilité de configuration | Pages indépendantes                        |
+|                           | Gestion de l'état dans un système externe  |
+|                           | Router côté back-end                       |
+|                           | Migration plus complexe (page entière)     |]
+
+---
+
+# 2. Comment migrer ?
+- Effectuer une migration par composants
+
+Conserver la même application en AngularJS dans laquelle des composants React seront traduits en composants AngularJS au moment de la build.
+
+.pure-table.pure-table-bordered.pure-table-striped.smaller-font[
+| Avantages                 | Inconvénients                              |
+|---------------------------|--------------------------------------------|
+| Refonte à l'état de l'art | Double application (coûts supplémentaires) |
+| Facilité de configuration | Pages indépendantes                        |
+|                           | Gestion de l'état dans un système externe  |
+|                           | Router côté back-end                       |
+|                           | Migration plus complexe (page entière)     |]
+
+Plus d'informations : [Guide de migration de la COP Front](https://dev.azure.com/axafrance/CoP%20Front/_git/wiki?path=/migration/index.md&_a=preview)

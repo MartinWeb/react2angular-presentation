@@ -12,7 +12,11 @@ font-weight: normal;
 code {
     background: #e7e8e2;
     border-radius: 5px;
-  }
+}
+
+table {
+    width: 100%;
+}
 
 #slide-why .grid {
     display: grid;
