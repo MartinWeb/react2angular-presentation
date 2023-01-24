@@ -8,3 +8,25 @@ font-family: 'Yanone Kaffeesatz';
 font-weight: normal;
 }
 .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+
+code {
+    background: #e7e8e2;
+    border-radius: 5px;
+  }
+
+#slide-why .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#slide-why .grid .left, #slide-why .grid .right {
+    width: 400px;
+}
+
+#slide-why .grid .left img, #slide-why .grid .right img {
+    max-width: 100%;
+}
+
+#slide-why-react img {
+    height: 350px;
+}
