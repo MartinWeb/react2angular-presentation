@@ -18,6 +18,20 @@ table {
     width: 100%;
 }
 
+#slide-subtitle .animate h1 {
+    animation: 3s slide-right;
+}
+
+@keyframes slide-right {
+  from {
+    margin-left: -150%;
+  }
+
+  to {
+    margin-left: 0%;
+  }
+}
+
 #slide-why .grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -33,4 +47,13 @@ table {
 
 #slide-why-react img {
     height: 350px;
+}
+
+#slide-react2angular-first-slide img {
+    width: 500px;
+}
+
+.delete-angular-img img {
+    margin-top: 20px;
+    height: 250px;
 }

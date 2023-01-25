@@ -1,7 +1,12 @@
 class: center, middle
 
 # Migrez vos apps AngularJS vers React
-# au fil de l'eau !
+--
+count: false
+name: subtitle
+
+.animate[
+    # au fil de l'eau !]
 
 ---
 
@@ -86,3 +91,131 @@ Conserver la même application en AngularJS dans laquelle des composants React s
 |                           | Migration plus complexe (page entière)     |]
 
 Plus d'informations : [Guide de migration de la COP Front](https://dev.azure.com/axafrance/CoP%20Front/_git/wiki?path=/migration/index.md&_a=preview)
+
+---
+
+# 3. react2angular à la rescousse
+
+.center[
+## [React2angular](https://github.com/coatue-oss/react2angular)
+
+![what is that](https://media.tenor.com/BsvJa7kN1TwAAAAC/what-is-that-what-the-fuck-is-that.gif)]
+
+---
+name: react2angular-first-slide
+
+# 3. react2angular à la rescousse
+
+React2angular est un package javascript permettant de convertir un composant React en composant AngularJS. Son équivalent angular2react existe également, et permet cette fois-ci de convertir un composant AngularJS en React.
+
+### Très bien, mais comment ça fonctionne dans les faits ?
+
+.center[![AngularJS vers React](https://raw.githubusercontent.com/coatue-oss/angular2react/master/logo.png)]
+
+---
+
+# 3. react2angular à la rescousse
+
+Prenons un composant AngularJS d'une application.
+
+```javascript
+import angular from 'angular';
+import template from './dap-distributor-pending.html';
+
+export const DapDistributorPendingComponent: angular.IComponentOptions = {
+    template,
+};
+```
+
+```html
+<div class="steps-container">
+    <div id="error_details" class="container-fluid">
+        <div class="panel panel-default">
+            <div class="panel-body text-center">
+                <h1>Demande d’autorisation préalable en cours d’instruction par les Engagements.</h1>
+                <h2>Votre demande est traitée dans les 48 heures qui suivent la demande.</h2>
+            </div>
+        </div>
+    </div>
+</div>
+```
+
+---
+
+# 3. react2angular à la rescousse
+
+Après migration en React, il ressemblerait à cela :
+
+```javascript
+export const DapDistributorPending = () => (
+    <div className="steps-container">
+        <div id="error_details" className="container-fluid">
+            <div className="panel panel-default">
+                <div className="panel-body text-center">
+                    <h1>Demande d’autorisation préalable en cours d’instruction par les Engagements.</h1>
+                    <h2>Votre demande est traitée dans les 48 heures qui suivent la demande.</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+);
+```
+
+---
+
+# 3. react2angular à la rescousse
+
+Mais comment faire cohabiter des composants React et AngularJS dans la même application ?
+
+- Installer les librairies nécessaires, notamment react2angular
+```bash
+npm install react2angular react react-dom
+```
+- Supprimer le composant AngularJS précédemment migré
+.center.delete-angular-img[![suppression composant angular](https://i.imgflip.com/78ptjz.jpg)]
+
+---
+
+# 3. react2angular à la rescousse
+
+- Exposez le composant React en AngularJS pour pouvoir l'utiliser dans l'application.
+
+```javascript
+import DapDistributorPending from '...';
+
+// déclaration du module AngularJS
+.component('dapDistributorPending', react2angular(() => DapDistributorPending))
+```
+
+```javascript
+import React from 'react';
+import { react2angular } from 'react2angular';
+import DapDistributorPending from '...';
+
+// Fichier d'index ou directement dans le composant React
+const DapDistributorPendingComponent = react2angular(() => <DapDistributorPending />);
+export { DapDistributorPendingComponent };
+
+// déclaration du module AngularJS 
+.component('dapDistributorPending', DapDistributorPendingComponent)
+```
+
+---
+
+# 3. react2angular à la rescousse
+
+Et c'est terminé !
+
+Votre application AngularJS utilisera votre tout nouveau et tout beau composant React.
+
+.center[![c'est magique](https://media4.giphy.com/media/Z5HVfEvnxr67u/giphy.gif?cid=ecf05e47g4hl5gcyw12a8i7w9w62236s2rglfphbq79nt3lw&rid=giphy.gif&ct=g)]
+
+---
+
+# 3. react2angular à la rescousse
+
+Ressources utiles
+
+- [Exemple des prérequis à mettre en place sur le projet Gestion Contrats (tribu IARDPP)](https://dev.azure.com/axafrance/ContractsIARD/_git/Sources/pullrequest/100921)
+- [Exemple des prérequis à mettre en place sur le projet MaMaison (tribu IARDPP)](https://dev.azure.com/axafrance/EMRH/_git/Sources/commit/e2c5f929e051191c99cd9cca9f159f06dede477f)
+- [Exemple de migration de composants sur le projet MaMaison (tribu IARDPP)](https://dev.azure.com/axafrance/EMRH/_git/Sources/pullrequest/156343)
