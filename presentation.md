@@ -15,6 +15,8 @@ name: subtitle
 1. Pourquoi migrer ?
 2. Comment migrer ?
 3. react2angular à la rescousse
+4. Démo
+5. Retour d'expérience
 
 ---
 
@@ -55,7 +57,7 @@ name: how
 | Avantages                                 | Inconvénients                                                                     |
 |-------------------------------------------|-----------------------------------------------------------------------------------|
 | Implication de l'équipe de développement  | Complexe sur des sujets majeurs, avec des roadmap chargées et de fortes deadlines |
-| Refonte à l'état de l'art                 | Presque impossible à mettre en oeuvre dans les faits                              |
+| Refonte à l'état de l'art                 |                                                                                   |
 | Pas de configuration spécifique au projet |                                                                                   |]
 
 ---
@@ -82,13 +84,11 @@ Avoir deux applications : une dans la technologie actuelle, et l'autre dans la t
 Conserver la même application en AngularJS dans laquelle des composants React seront traduits en composants AngularJS au moment de la build.
 
 .pure-table.pure-table-bordered.pure-table-striped.smaller-font[
-| Avantages                 | Inconvénients                              |
-|---------------------------|--------------------------------------------|
-| Refonte à l'état de l'art | Double application (coûts supplémentaires) |
-| Facilité de configuration | Pages indépendantes                        |
-|                           | Gestion de l'état dans un système externe  |
-|                           | Router côté back-end                       |
-|                           | Migration plus complexe (page entière)     |]
+| Avantages                                       | Inconvénients                        |
+|-------------------------------------------------|--------------------------------------|
+| Migration au fil de l'eau                       | Configuration temporaire (webpack)   |
+| Totalement invisible pour l'utilisateur         | Découpage en composants obligatoires |
+| Parfaitement intégré dans les cycles de release |                                      |]
 
 Plus d'informations : [Guide de migration de la COP Front](https://dev.azure.com/axafrance/CoP%20Front/_git/wiki?path=/migration/index.md&_a=preview)
 
@@ -214,8 +214,59 @@ Votre application AngularJS utilisera votre tout nouveau et tout beau composant 
 
 # 3. react2angular à la rescousse
 
+Mais encore ?
+
+Une application est rarement aussi simple qu'une somme de composants avec des templates. Elle peut comprendre des composants avec de multiples props, une gestion d'état dans un store, l'utilisation de services propres à AngularJS, du routing, ...
+
+Par exemple : 
+- si votre composant demande des props, react2angular vous permet de les passer
+
+```javascript
+const DapPendingEngagementAlertComponent = react2angular((props) => 
+    <DapPendingEngagementAlert {...props} />);
+```
+- si vous utilisez redux dans votre application AngularJS, vous pouvez utiliser le package équivalent en React `react-redux`.
+- si vous utilisez ui-router pour le routing, vous pouvez utiliser `@uirouter/react-hybrid`
+
+---
+
+# 3. react2angular à la rescousse
+
 Ressources utiles
 
 - [Exemple des prérequis à mettre en place sur le projet Gestion Contrats (tribu IARDPP)](https://dev.azure.com/axafrance/ContractsIARD/_git/Sources/pullrequest/100921)
 - [Exemple des prérequis à mettre en place sur le projet MaMaison (tribu IARDPP)](https://dev.azure.com/axafrance/EMRH/_git/Sources/commit/e2c5f929e051191c99cd9cca9f159f06dede477f)
 - [Exemple de migration de composants sur le projet MaMaison (tribu IARDPP)](https://dev.azure.com/axafrance/EMRH/_git/Sources/pullrequest/156343)
+
+---
+
+# 4. Démo
+
+.center[![Démo](https://i.imgflip.com/3n1x6c.jpg)]
+
+---
+
+# 5. Retour d'expérience
+
+Migration complète du SA mineur (~10k lignes de code) [Gestion contrats](https://dev.azure.com/axafrance/ContractsIARD) en quelques mois via du Mob Programming.
+
+Migration en cours du SA majeur (~26k lignes de code) [Ma Maison](https://dev.azure.com/axafrance/EMRH) achevée à ~50%.
+
+---
+
+# 5. Retour d'expérience
+
+Tips pour migrer efficacement :
+- Commencez par migrer les composants du plus bas niveau dans le DOM
+- Commencez par migrer les pages les plus simples de l'application en premier
+- S'assurez d'une bonne couverture de tests du composant avant la migration de celui-ci
+- Profitez de la migration pour passer les composants en Typescript
+- Ne pas hésitez à utiliser les composants du toolkit quand c'est possible (les moins impactants en terme de design)
+
+---
+
+# 5. Retour d'expérience
+
+A votre tour de jouer !
+
+.center[![En cours](img/78uf95.gif)]
