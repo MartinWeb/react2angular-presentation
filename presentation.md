@@ -86,9 +86,9 @@ Conserver la même application en AngularJS dans laquelle des composants React s
 .pure-table.pure-table-bordered.pure-table-striped.smaller-font[
 | Avantages                                       | Inconvénients                        |
 |-------------------------------------------------|--------------------------------------|
-| Migration au fil de l'eau                       | Configuration temporaire (webpack)   |
-| Totalement invisible pour l'utilisateur         | Découpage en composants obligatoires |
-| Parfaitement intégré dans les cycles de release |                                      |]
+| Migration au fil de l'eau                       | Découpage en composants obligatoires |
+| Totalement invisible pour l'utilisateur         | Pas à l'état de l'art                |
+| Parfaitement intégré dans les cycles de release | Plus long (intégré aux releases)     |]
 
 Plus d'informations : [Guide de migration de la COP Front](https://dev.azure.com/axafrance/CoP%20Front/_git/wiki?path=/migration/index.md&_a=preview)
 
@@ -250,7 +250,7 @@ Ressources utiles
 
 Migration complète du SA mineur (~10k lignes de code) [Gestion contrats](https://dev.azure.com/axafrance/ContractsIARD) en quelques mois via du Mob Programming.
 
-Migration en cours du SA majeur (~26k lignes de code) [Ma Maison](https://dev.azure.com/axafrance/EMRH) achevée à ~50%.
+Migration en cours du SA majeur (~26k lignes de code) [Ma Maison](https://dev.azure.com/axafrance/EMRH) achevée à ~80%.
 
 ---
 
@@ -259,9 +259,10 @@ Migration en cours du SA majeur (~26k lignes de code) [Ma Maison](https://dev.az
 Tips pour migrer efficacement :
 - Commencez par migrer les composants du plus bas niveau dans le DOM
 - Commencez par migrer les pages les plus simples de l'application en premier
-- S'assurez d'une bonne couverture de tests du composant avant la migration de celui-ci
+- Assurez-vous d'une bonne couverture de tests d'intégration du composant avant la migration
 - Profitez de la migration pour passer les composants en Typescript
-- Ne pas hésitez à utiliser les composants du toolkit quand c'est possible (les moins impactants en terme de design)
+- N'hésitez pas à utiliser les composants du toolkit quand c'est possible (les moins impactants en terme de design)
+- Migrez les services AngularJS à la fin
 
 ---
 
